@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>XSS Playground</title>
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        header {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 20px 0 40px;
+            background: linear-gradient(90deg, #ff9966, #ff5e62);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #ffcc70;
+        }
+        .input-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        input[type=text] {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+        button {
+            background: linear-gradient(90deg, #ff9966, #ff5e62);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+        button:hover {transform: scale(1.05);}
+        .box {
+            min-height: 50px;
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            overflow-wrap: break-word;
+        }
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(10px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        @media (max-width: 900px) {
+            main {grid-template-columns: 1fr;}
+        }
+    </style>
+</head>
+<body>
+<header>XSS Playground</header>
+<main>
+    <div class="card">
+        <h2>Instant XSS #1</h2>
+        <div class="box" id="instant1"></div>
+    </div>
+    <div class="card">
+        <h2>Instant XSS #2</h2>
+        <div class="box" id="instant2"></div>
+    </div>
+    <div class="card">
+        <h2>Instant XSS #3</h2>
+        <div class="box" id="instant3"></div>
+    </div>
+    <div class="card">
+        <h2>Button XSS #4</h2>
+        <div class="input-row">
+            <input type="text" id="search">
+            <button onclick="vulnButton1()">Run</button>
+        </div>
+        <div class="box" id="result1"></div>
+    </div>
+    <div class="card">
+        <h2>Button XSS #5</h2>
+        <div class="input-row">
+            <input type="text" id="comment">
+            <button onclick="vulnButton2()">Run</button>
+        </div>
+        <div class="box" id="result2"></div>
+    </div>
+    <div class="card">
+        <h2>Button XSS #6</h2>
+        <div class="input-row">
+            <input type="text" id="profileInput">
+            <button onclick="setProfile()">Run</button>
+        </div>
+        <div class="box" id="profileBox"></div>
+    </div>
+    <div class="card">
+        <h2>Param XSS #7</h2>
+        <button onclick="vulnButton3()">Show</button>
+        <div class="box" id="result3"></div>
+    </div>
+    <div class="card">
+        <h2>Button XSS #8</h2>
+        <div class="input-row">
+            <input type="text" id="productInput">
+            <button onclick="loadProduct()">Run</button>
+        </div>
+        <div class="box" id="productBox"></div>
+    </div>
+    <div class="card">
+        <h2>Delayed XSS #9</h2>
+        <div class="box" id="delayedBox">Wait 2s...</div>
+    </div>
+    <div class="card">
+        <h2>Eval XSS #10</h2>
+        <div class="box">Pass `code` param in URL</div>
+    </div>
+</main>
+
+<script>
+    let params = new URLSearchParams(window.location.search);
+    let p1 = params.get("x1"); if (p1) document.getElementById("instant1").innerHTML = p1;
+    let p2 = params.get("x2"); if (p2) document.getElementById("instant2").innerHTML = p2;
+    let p3 = params.get("x3"); if (p3) document.getElementById("instant3").innerHTML = p3;
+    function vulnButton1() {document.getElementById("result1").innerHTML = document.getElementById("search").value;}
+    function vulnButton2() {document.getElementById("result2").innerHTML = document.getElementById("comment").value;}
+    function setProfile() {document.getElementById("profileBox").innerHTML = "Profile: " + document.getElementById("profileInput").value;}
+    function vulnButton3() {let val = params.get("showme"); document.getElementById("result3").innerHTML = val;}
+    function loadProduct() {document.getElementById("productBox").innerHTML = "<b>Product:</b> " + document.getElementById("productInput").value;}
+    let p4 = params.get("x4"); setTimeout(()=>{if(p4) document.getElementById("delayedBox").innerHTML = p4;},2000);
+    let p5 = params.get("code"); if (p5) eval(p5);
+</script>
+</body>
+</html>
