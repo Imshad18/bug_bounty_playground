@@ -87,63 +87,38 @@
 <body>
 <header>XSS Playground</header>
 <main>
-    <div class="card">
-        <h2>Instant XSS #1</h2>
-        <div class="box" id="instant1"></div>
-    </div>
-    <div class="card">
-        <h2>Instant XSS #2</h2>
-        <div class="box" id="instant2"></div>
-    </div>
-    <div class="card">
-        <h2>Instant XSS #3</h2>
-        <div class="box" id="instant3"></div>
-    </div>
-    <div class="card">
-        <h2>Button XSS #4</h2>
-        <div class="input-row">
-            <input type="text" id="search">
-            <button onclick="vulnButton1()">Run</button>
-        </div>
-        <div class="box" id="result1"></div>
-    </div>
-    <div class="card">
-        <h2>Button XSS #5</h2>
-        <div class="input-row">
-            <input type="text" id="comment">
-            <button onclick="vulnButton2()">Run</button>
-        </div>
-        <div class="box" id="result2"></div>
-    </div>
-    <div class="card">
-        <h2>Button XSS #6</h2>
-        <div class="input-row">
-            <input type="text" id="profileInput">
-            <button onclick="setProfile()">Run</button>
-        </div>
-        <div class="box" id="profileBox"></div>
-    </div>
-    <div class="card">
-        <h2>Param XSS #7</h2>
-        <button onclick="vulnButton3()">Show</button>
-        <div class="box" id="result3"></div>
-    </div>
-    <div class="card">
-        <h2>Button XSS #8</h2>
-        <div class="input-row">
-            <input type="text" id="productInput">
-            <button onclick="loadProduct()">Run</button>
-        </div>
-        <div class="box" id="productBox"></div>
-    </div>
-    <div class="card">
-        <h2>Delayed XSS #9</h2>
-        <div class="box" id="delayedBox">Wait 2s...</div>
-    </div>
-    <div class="card">
-        <h2>Eval XSS #10</h2>
-        <div class="box">Pass `code` param in URL</div>
-    </div>
+    <div class="card"><h2>Instant XSS #1</h2><div class="box" id="instant1"></div></div>
+    <div class="card"><h2>Instant XSS #2</h2><div class="box" id="instant2"></div></div>
+    <div class="card"><h2>Instant XSS #3</h2><div class="box" id="instant3"></div></div>
+    <div class="card"><h2>Button XSS #4</h2><div class="input-row"><input type="text" id="search"><button onclick="vulnButton1()">Run</button></div><div class="box" id="result1"></div></div>
+    <div class="card"><h2>Button XSS #5</h2><div class="input-row"><input type="text" id="comment"><button onclick="vulnButton2()">Run</button></div><div class="box" id="result2"></div></div>
+    <div class="card"><h2>Button XSS #6</h2><div class="input-row"><input type="text" id="profileInput"><button onclick="setProfile()">Run</button></div><div class="box" id="profileBox"></div></div>
+    <div class="card"><h2>Param XSS #7</h2><button onclick="vulnButton3()">Show</button><div class="box" id="result3"></div></div>
+    <div class="card"><h2>Button XSS #8</h2><div class="input-row"><input type="text" id="productInput"><button onclick="loadProduct()">Run</button></div><div class="box" id="productBox"></div></div>
+    <div class="card"><h2>Delayed XSS #9</h2><div class="box" id="delayedBox">Wait 2s...</div></div>
+    <div class="card"><h2>Eval XSS #10</h2><div class="box">Pass `code` param in URL</div></div>
+
+    <div class="card"><h2>Encoded Param XSS #11</h2><div class="box" id="encodedParam"></div></div>
+    <div class="card"><h2>Base64 XSS #12</h2><div class="box" id="base64Param"></div></div>
+    <div class="card"><h2>Template Literal XSS #13</h2><div class="input-row"><input type="text" id="tmplInput"><button onclick="tmplVuln()">Run</button></div><div class="box" id="tmplBox"></div></div>
+    <div class="card"><h2>Iframe Injection #14</h2><div class="input-row"><input type="text" id="iframeInput"><button onclick="iframeVuln()">Run</button></div><div class="box" id="iframeBox"></div></div>
+    <div class="card"><h2>Event Handler XSS #15</h2><div class="input-row"><input type="text" id="eventInput"><button onclick="eventVuln()">Run</button></div><div class="box" id="eventBox"></div></div>
+    <div class="card"><h2>SVG Injection #16</h2><div class="box" id="svgBox"></div></div>
+    <div class="card"><h2>CSS Expression XSS #17</h2><div class="box" id="cssExprBox"></div></div>
+    <div class="card"><h2>Script Src Injection #18</h2><div class="input-row"><input type="text" id="srcInput"><button onclick="srcVuln()">Run</button></div><div class="box" id="srcBox"></div></div>
+    <div class="card"><h2>Attribute Breakout XSS #19</h2><div class="input-row"><input type="text" id="attrInput"><button onclick="attrVuln()">Run</button></div><div class="box" id="attrBox"></div></div>
+    <div class="card"><h2>JSON Injection #20</h2><div class="box" id="jsonBox"></div></div>
+
+    <div class="card"><h2>DOM Clobbering XSS #21</h2><div class="box" id="domClobber"></div></div>
+    <div class="card"><h2>MutationObserver XSS #22</h2><div class="box" id="moBox"></div></div>
+    <div class="card"><h2>Service Worker XSS #23</h2><div class="box" id="swBox"></div></div>
+    <div class="card"><h2>WebSocket Echo XSS #24</h2><div class="box" id="wsBox"></div></div>
+    <div class="card"><h2>PostMessage XSS #25</h2><iframe id="pmFrame"></iframe></div>
+    <div class="card"><h2>innerHTML Chain XSS #26</h2><div class="box" id="chainBox"></div></div>
+    <div class="card"><h2>Dynamic Script XSS #27</h2><div class="box" id="dynScriptBox"></div></div>
+    <div class="card"><h2>setTimeout Code XSS #28</h2><div class="box" id="stBox"></div></div>
+    <div class="card"><h2>Shadow DOM XSS #29</h2><div class="box" id="shadowBox"></div></div>
+    <div class="card"><h2>Trusted Types Bypass XSS #30</h2><div class="box" id="ttBox"></div></div>
 </main>
 
 <script>
@@ -151,48 +126,35 @@
     let p1 = params.get("x1"); if (p1) document.getElementById("instant1").innerHTML = p1;
     let p2 = params.get("x2"); if (p2) document.getElementById("instant2").innerHTML = p2;
     let p3 = params.get("x3"); if (p3) document.getElementById("instant3").innerHTML = p3;
+    function vulnButton1() {document.getElementById("result1").innerHTML = document.getElementById("search").value;}
+    function vulnButton2() {let val = document.getElementById("comment").value.replace(/</g,"&lt;").replace(/>/g,"&gt;"); document.getElementById("result2").innerHTML = val;}
+    function setProfile() {let val = document.getElementById("profileInput").value; if(!val.includes("<script")) document.getElementById("profileBox").innerHTML = "Profile: " + val;}
+    function vulnButton3() {let val = params.get("showme"); document.getElementById("result3").innerHTML = val;}
+    function loadProduct() {let val = document.getElementById("productInput").value; if(/<script/i.test(val)) return; document.getElementById("productBox").innerHTML = "<b>Product:</b> " + val;}
+    let p4 = params.get("x4"); setTimeout(()=>{if(p4) document.getElementById("delayedBox").innerHTML = p4;},2000);
+    let p5 = params.get("code"); if (p5) eval(p5);
 
-   
-    function vulnButton1() {
-        document.getElementById("result1").innerHTML = document.getElementById("search").value;
-    }
+    let p11 = params.get("enc"); if (p11) document.getElementById("encodedParam").innerHTML = decodeURIComponent(p11);
+    let p12 = params.get("b64"); if (p12) document.getElementById("base64Param").innerHTML = atob(p12);
+    function tmplVuln(){let v=document.getElementById("tmplInput").value; document.getElementById("tmplBox").innerHTML = `${v}`;}
+    function iframeVuln(){document.getElementById("iframeBox").innerHTML = `<iframe src="${document.getElementById("iframeInput").value}"></iframe>`;}
+    function eventVuln(){document.getElementById("eventBox").innerHTML = `<div ${document.getElementById("eventInput").value}>Click me</div>`;}
+    let p16 = params.get("svg"); if (p16) document.getElementById("svgBox").innerHTML = `<svg>${p16}</svg>`;
+    let p17 = params.get("css"); if (p17) document.getElementById("cssExprBox").innerHTML = `<div style="${p17}">Test</div>`;
+    function srcVuln(){document.getElementById("srcBox").innerHTML = `<script src="${document.getElementById("srcInput").value}"></script>`;}
+    function attrVuln(){document.getElementById("attrBox").innerHTML = `<img src="x" ${document.getElementById("attrInput").value}>`;}
+    let p20 = params.get("json"); if (p20) document.getElementById("jsonBox").innerHTML = JSON.parse(`{"data":"${p20}"}`).data;
 
-    
-    function vulnButton2() {
-        let val = document.getElementById("comment").value;
-        // Replace < and > so direct tags won't run unless bypassed
-        val = val.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-        document.getElementById("result2").innerHTML = val;
-    }
-
-    
-    function setProfile() {
-        let val = document.getElementById("profileInput").value;
-        document.getElementById("profileBox").innerHTML =
-            `<img src="x" alt="${val}">`;
-    }
-
-    
-    function vulnButton3() {
-        let val = params.get("showme");
-        document.getElementById("result3").innerHTML = val;
-    }
-
-   
-    function loadProduct() {
-        let val = document.getElementById("productInput").value;
-        document.getElementById("productBox").innerHTML =
-            `<div onclick="alert('${val}')">Click product</div>`;
-    }
-
-    let p4 = params.get("x4");
-    setTimeout(() => {
-        if (p4) document.getElementById("delayedBox").innerHTML = p4;
-    }, 2000);
-
-    let p5 = params.get("code");
-    if (p5) eval(p5);
+    let p21 = params.get("dom"); if (p21) document[p21] = "test"; document.getElementById("domClobber").innerHTML = window.id;
+    let p22 = params.get("mo"); if (p22){let target=document.getElementById("moBox");let obs=new MutationObserver(()=>{eval(p22)});obs.observe(target,{childList:true});target.innerHTML="change";}
+    let p23 = params.get("sw"); if (p23) navigator.serviceWorker.register(p23);
+    let p24 = params.get("ws"); if (p24){let ws=new WebSocket(p24);ws.onmessage=(e)=>{document.getElementById("wsBox").innerHTML=e.data};}
+    let p25 = params.get("pm"); if (p25){let f=document.getElementById("pmFrame");window.addEventListener("message",(e)=>{document.body.innerHTML=e.data});f.contentWindow.postMessage(p25,"*");}
+    let p26 = params.get("chain"); if (p26) document.getElementById("chainBox").innerHTML = `<div>${p26}</div>`;
+    let p27 = params.get("dyn"); if (p27){let s=document.createElement("script");s.innerHTML=p27;document.getElementById("dynScriptBox").appendChild(s);}
+    let p28 = params.get("st"); if (p28) setTimeout(p28,1000);
+    let p29 = params.get("shadow"); if (p29){let sh=document.getElementById("shadowBox").attachShadow({mode:"open"});sh.innerHTML=p29;}
+    let p30 = params.get("tt"); if (p30) document.getElementById("ttBox").innerHTML = p30;
 </script>
-
 </body>
 </html>
