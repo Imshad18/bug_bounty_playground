@@ -151,13 +151,48 @@
     let p1 = params.get("x1"); if (p1) document.getElementById("instant1").innerHTML = p1;
     let p2 = params.get("x2"); if (p2) document.getElementById("instant2").innerHTML = p2;
     let p3 = params.get("x3"); if (p3) document.getElementById("instant3").innerHTML = p3;
-    function vulnButton1() {document.getElementById("result1").innerHTML = document.getElementById("search").value;}
-    function vulnButton2() {document.getElementById("result2").innerHTML = document.getElementById("comment").value;}
-    function setProfile() {document.getElementById("profileBox").innerHTML = "Profile: " + document.getElementById("profileInput").value;}
-    function vulnButton3() {let val = params.get("showme"); document.getElementById("result3").innerHTML = val;}
-    function loadProduct() {document.getElementById("productBox").innerHTML = "<b>Product:</b> " + document.getElementById("productInput").value;}
-    let p4 = params.get("x4"); setTimeout(()=>{if(p4) document.getElementById("delayedBox").innerHTML = p4;},2000);
-    let p5 = params.get("code"); if (p5) eval(p5);
+
+   
+    function vulnButton1() {
+        document.getElementById("result1").innerHTML = document.getElementById("search").value;
+    }
+
+    
+    function vulnButton2() {
+        let val = document.getElementById("comment").value;
+        // Replace < and > so direct tags won't run unless bypassed
+        val = val.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        document.getElementById("result2").innerHTML = val;
+    }
+
+    
+    function setProfile() {
+        let val = document.getElementById("profileInput").value;
+        document.getElementById("profileBox").innerHTML =
+            `<img src="x" alt="${val}">`;
+    }
+
+    
+    function vulnButton3() {
+        let val = params.get("showme");
+        document.getElementById("result3").innerHTML = val;
+    }
+
+   
+    function loadProduct() {
+        let val = document.getElementById("productInput").value;
+        document.getElementById("productBox").innerHTML =
+            `<div onclick="alert('${val}')">Click product</div>`;
+    }
+
+    let p4 = params.get("x4");
+    setTimeout(() => {
+        if (p4) document.getElementById("delayedBox").innerHTML = p4;
+    }, 2000);
+
+    let p5 = params.get("code");
+    if (p5) eval(p5);
 </script>
+
 </body>
 </html>
