@@ -86,10 +86,7 @@
 </head>
 <body>
 <header>XSS Playground</header>
-<main id="cards">
-  
-</main>
-
+<main id="cards"></main>
 <script>
 const challenges = [
     "Instant XSS #1", "Instant XSS #2", "Instant XSS #3",
@@ -107,7 +104,6 @@ const challenges = [
     "Dynamic Script XSS #27", "setTimeout Code XSS #28",
     "Shadow DOM XSS #29", "Trusted Types Bypass XSS #30"
 ];
-
 const main = document.getElementById("cards");
 challenges.forEach((title, idx) => {
     const card = document.createElement("div");
@@ -115,8 +111,7 @@ challenges.forEach((title, idx) => {
     const h2 = document.createElement("h2");
     h2.textContent = title;
     card.appendChild(h2);
-
-    if ([3,4,5,7,8,10,11,12,13,14,15,16,17,18,19,26,27,28].includes(idx+1)) {
+    if ([4,5,6,8,11,12,13,14,15,16,17,18,19,26,27,28].includes(idx+1)) {
         const row = document.createElement("div");
         row.className = "input-row";
         const input = document.createElement("input");
@@ -129,38 +124,43 @@ challenges.forEach((title, idx) => {
         row.appendChild(btn);
         card.appendChild(row);
     }
-
     const box = document.createElement("div");
     box.className = "box";
     box.id = `box${idx+1}`;
     if (idx+1 === 9) box.textContent = "Wait 2s...";
     if (idx+1 === 10) box.textContent = "Pass `code` param in URL";
-    card.appendChild(box);
     main.appendChild(card);
+    card.appendChild(box);
 });
-
 const params = new URLSearchParams(location.search);
-
 function runXSS(id) {
     const val = document.getElementById(`input${id}`).value;
     switch(id) {
         case 4: document.getElementById("box4").innerHTML = val; break;
-        case 5: document.getElementById("box5").innerHTML = val.replace(/</g,"&lt;"); break;
+        case 5: document.getElementById("box5").innerHTML = val; break;
         case 6: document.getElementById("box6").innerHTML = "Profile: " + val; break;
         case 8: document.getElementById("box8").innerHTML = "<b>Product:</b> " + val; break;
-    
+        case 11: document.getElementById("box11").setAttribute("data-x", val); break;
+        case 12: document.getElementById("box12").innerHTML = eval('`'+val+'`'); break;
+        case 13: document.getElementById("box13").innerHTML = `<iframe srcdoc="${val}"></iframe>`; break;
+        case 14: document.getElementById("box14").innerHTML = atob(val); break;
+        case 15: location.hash = val; document.getElementById("box15").innerHTML = location.hash.substring(1); break;
+        case 16: document.getElementById("box16").setAttribute("onclick", val); break;
+        case 17: const c = document.createElement("canvas"); c.onclick = () => eval(val); document.getElementById("box17").appendChild(c); break;
+        case 18: history.pushState({}, "", val); document.getElementById("box18").innerHTML = document.location; break;
+        case 19: localStorage.payload = val; document.getElementById("box19").innerHTML = localStorage.payload; break;
+        case 26: document.getElementById("box26").innerHTML = val; document.getElementById("box26").innerHTML += val; break;
+        case 27: const s = document.createElement("script"); s.innerHTML = val; document.body.appendChild(s); break;
+        case 28: setTimeout(val, 1000); break;
         default: document.getElementById(`box${id}`).innerHTML = val; break;
     }
 }
-
-
 if (params.get("x1")) document.getElementById("box1").innerHTML = params.get("x1");
 if (params.get("x2")) document.getElementById("box2").innerHTML = params.get("x2");
 if (params.get("x3")) document.getElementById("box3").innerHTML = params.get("x3");
 if (params.get("showme")) document.getElementById("box7").innerHTML = params.get("showme");
 if (params.get("x4")) setTimeout(()=>document.getElementById("box9").innerHTML=params.get("x4"),2000);
 if (params.get("code")) eval(params.get("code"));
-
 </script>
 </body>
 </html>
